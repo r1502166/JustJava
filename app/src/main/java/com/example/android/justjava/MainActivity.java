@@ -2,10 +2,10 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
-
-import java.text.NumberFormat;
 
 /**
  * This app displays an order form to order coffee.
@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
         return quantity * 5;
     }
 
-    private String createOrderSummary(int price) {
-        String priceMessage = "Name: Kaptain Kunal";
+    private String createOrderSummary(int price, boolean addWhippedCream) {
+        String priceMessage = "Name: Lyla the Labyrinth";
+        priceMessage += "\nAdd whipped cream? " + addWhippedCream;
         priceMessage += "\nQuantity: " + quantity;
         priceMessage += "\nTotal: $" + price;
         priceMessage += "\nThank you!";
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         int price = calculatePrice();
-        String priceMessage = createOrderSummary(price);
+        String priceMessage = createOrderSummary(price, hasWhippedCream);
         displayMessage(priceMessage);
     }
 
